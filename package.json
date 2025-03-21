@@ -1,0 +1,49 @@
+{
+  "dependencies": {
+    "@coinbase/agentkit": "^0.4.0",
+    "@coinbase/agentkit-langchain": "^0.3.0",
+    "@langchain/core": "^0.3.42",
+    "@langchain/langgraph": "^0.2.57",
+    "@langchain/openai": "^0.4.5",
+    "node-telegram-bot-api": "^0.66.0",
+    "viem": "^2.23.13",
+    "reflect-metadata": "^0.2.2",
+    "secretvaults": "0.0.0-alpha.1",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "@types/node-telegram-bot-api": "^0.64.8",
+    "@typescript-eslint/eslint-plugin": "^8.27.0",
+    "@typescript-eslint/parser": "^8.27.0",
+    "eslint": "^9.22.0",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-prettier": "^5.2.3",
+    "prettier": "^3.5.3",
+    "rimraf": "^6.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2",
+    "@types/reflect-metadata": "^0.1.0",
+    "@types/uuid": "^9.0.8"
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/chatbot.js",
+    "create-schemas": "npm run build && node dist/scripts/createSchemas.js",
+    "lint": "eslint \"src/**/*.ts\" \"src/action-providers/nillion-secretvault/**/*.ts\"",
+    "lint:fix": "eslint \"src/**/*.ts\" \"src/action-providers/nillion-secretvault/**/*.ts\" --fix",
+    "format": "prettier --write \"src/**/*.{ts,js,json}\" \"src/action-providers/nillion-secretvault/**/*.{ts,js,json}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,js,json}\" \"src/action-providers/nillion-secretvault/**/*.{ts,js,json}\"",
+    "check": "tsc --noEmit",
+    "test": "npx jest --no-cache --testMatch='**/*.test.ts'",
+    "test:dry-run": "npm install && npm ci && npm publish --dry-run",
+    "test:e2e": "npx jest --no-cache --testMatch=**/e2e.ts --coverageThreshold '{}'",
+    "test:types": "tsd --files src/tests/types.test-d.ts",
+    "prepack": "tsc",
+    "docs": "typedoc --entryPoints ./src --entryPointStrategy expand --exclude ./src/tests/**/*.ts",
+    "docs:serve": "http-server ./docs"
+  },
+  "type": "module"
+}
